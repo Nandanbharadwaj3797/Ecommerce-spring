@@ -1,28 +1,21 @@
 package com.example.ecommercespring.controllers;
 
+import com.example.ecommercespring.services.ICategoryService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/categories")
 public class CategoryController {
+    private ICategoryService categoryService;
+
+    CategoryController(ICategoryService _categoryService) {
+        this.categoryService = _categoryService;
+    }
 
     @GetMapping
-    public String getCategory(){
-        return "Electronics";
-    }
-
-    @PostMapping
-    public String getPostCategory(){
-        return " post Electronics";
-    }
-
-    @GetMapping("/count") //if we call a get request on /api/categories/count
-    public int getCategoryCount(){
-        return 1;
-    }
-
-    @DeleteMapping
-    public String deleteCategory(){
-        return "deleted categories";
+    public List<String> getAllCategory(){
+        return this.categoryService.getAllCategories();
     }
 }

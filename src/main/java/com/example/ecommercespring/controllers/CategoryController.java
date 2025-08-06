@@ -22,4 +22,10 @@ public class CategoryController {
         List<CategoryDTO>result= this.categoryService.getAllCategories();
         return ResponseEntity.ok(result);
     }
+
+    @PostMapping
+    public ResponseEntity<CategoryDTO> createCategory(@RequestBody CategoryDTO  categoryDTO) {
+
+        throw new UnsupportedOperationException("Method not yet implemented");
+    }
 }

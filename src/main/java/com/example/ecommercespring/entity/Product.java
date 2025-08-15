@@ -1,6 +1,7 @@
 package com.example.ecommercespring.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.*;
@@ -29,7 +30,10 @@ public class Product extends BaseEntity {
      * - Using LAZY fetch to load category only when needed.
      * - category_id column will be non-null (nullable = false).
      */
-    @ManyToOne
+    //
+    //Eager-> At the time you fetch the parent entity (SELECT Query), Hibernate will also fetch the associated entities (often with a join or multiple Selects).
+    //Lazy ->Hibernate uses a proxy for the relation. The actual SELECT for the related data happens when you call a getter.
+    @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 }

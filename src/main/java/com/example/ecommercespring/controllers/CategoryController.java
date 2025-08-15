@@ -1,5 +1,6 @@
 package com.example.ecommercespring.controllers;
 
+import com.example.ecommercespring.dto.AllProductsOfCategoryDTO;
 import com.example.ecommercespring.dto.CategoryDTO;
 import com.example.ecommercespring.services.ICategoryService;
 import org.springframework.http.ResponseEntity;
@@ -32,5 +33,11 @@ public class CategoryController {
     public ResponseEntity<CategoryDTO> createCategory(@RequestBody CategoryDTO  categoryDTO) {
 
         throw new UnsupportedOperationException("Method not yet implemented");
+    }
+
+    @GetMapping("/{id}/products")
+    public ResponseEntity<AllProductsOfCategoryDTO>getAllProductOfCategoryDTO(@PathVariable Long id)throws Exception {
+        AllProductsOfCategoryDTO dto=categoryService.getAllProductsOfCategory(id);
+        return ResponseEntity.ok(dto);
     }
 }

@@ -1,4 +1,5 @@
 package com.example.ecommercespring.services;
+import com.example.ecommercespring.dto.AllProductsOfCategoryDTO;
 import com.example.ecommercespring.dto.CategoryDTO;
 
 import java.io.IOException;
@@ -10,4 +11,6 @@ public interface ICategoryService {
     CategoryDTO createCategory(CategoryDTO categoryDTO);
 
     CategoryDTO getByName(String name) throws IOException;
+
+    AllProductsOfCategoryDTO getAllProductsOfCategory(Long categoryId) throws Exception;
 }

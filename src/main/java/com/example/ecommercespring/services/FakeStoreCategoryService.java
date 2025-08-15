@@ -1,5 +1,6 @@
 package com.example.ecommercespring.services;
 
+import com.example.ecommercespring.dto.AllProductsOfCategoryDTO;
 import com.example.ecommercespring.dto.CategoryDTO;
 import com.example.ecommercespring.gateway.ICategoryGateway;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -33,6 +34,10 @@ public class FakeStoreCategoryService implements ICategoryService {
         return null;
     }
 
+    @Override
+    public AllProductsOfCategoryDTO getAllProductsOfCategory(Long categoryId){
+        return null;
+    }
 
 
 }

@@ -1,15 +1,19 @@
 package com.example.ecommercespring.services;
 
 
+import com.example.ecommercespring.dto.AllProductsOfCategoryDTO;
 import com.example.ecommercespring.dto.CategoryDTO;
+import com.example.ecommercespring.dto.ProductDto;
 import com.example.ecommercespring.entity.Category;
 import com.example.ecommercespring.mappers.CategoryMapper;
+import com.example.ecommercespring.mappers.ProductMapper;
 import com.example.ecommercespring.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryService implements ICategoryService {
@@ -44,4 +48,19 @@ public class CategoryService implements ICategoryService {
         return CategoryMapper.toDto(category);
     }
 
+    public AllProductsOfCategoryDTO getAllProductsOfCategory(Long categoryId) throws Exception {
+        Category category=repo.findById(categoryId)
+                .orElseThrow(() -> new Exception("Category not found with id"+categoryId));
+
+        List<ProductDto> productDtos = category.getProducts()
+                .stream()
+                .map(product -> ProductMapper.toDto(product))
+                .collect(Collectors.toList());
+
+        return AllProductsOfCategoryDTO.builder()
+                .categoryId(category.getId())
+                .name(category.getName())
+                .products(productDtos)
+                .build();
+    }
 }

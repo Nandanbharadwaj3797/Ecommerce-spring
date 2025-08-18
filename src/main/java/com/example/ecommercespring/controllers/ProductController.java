@@ -4,7 +4,6 @@ package com.example.ecommercespring.controllers;
 import com.example.ecommercespring.dto.ProductDto;
 import com.example.ecommercespring.dto.ProductWithCategoryDTO;
 import com.example.ecommercespring.services.IProductService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,13 +17,11 @@ public class ProductController {
         this.productService = productService;
     }
     @GetMapping("/{id}")
-    public ResponseEntity<?> getProductById(@PathVariable Long id){
-        try{
-            ProductDto result=this.productService.getProductById(id);
-            return ResponseEntity.ok(result);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product Not found");
-        }
+    public ResponseEntity<?> getProductById(@PathVariable Long id)throws Exception{
+
+        ProductDto result=this.productService.getProductById(id);
+        return ResponseEntity.ok(result);
+
     }
     @PostMapping
     public ResponseEntity<ProductDto>createProduct(@RequestBody ProductDto productDto)throws Exception{
@@ -36,5 +33,6 @@ public class ProductController {
         ProductWithCategoryDTO dto =  productService.getProductWithCategory(id);
         return ResponseEntity.ok(dto);
     }
+
 
 }

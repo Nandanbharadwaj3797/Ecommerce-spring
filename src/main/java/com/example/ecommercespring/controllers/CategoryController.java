@@ -20,7 +20,7 @@ public class CategoryController {
 
     @GetMapping
     public ResponseEntity<?> getAllCategory(@RequestParam(required = false) String name) throws IOException {
-        if(name !=null & !name.isBlank()) {
+        if(name !=null && !name.isBlank()) {
             CategoryDTO categoryDTO=categoryService.getByName(name);
             return ResponseEntity.ok(categoryDTO);
         }else{
@@ -40,4 +40,6 @@ public class CategoryController {
         AllProductsOfCategoryDTO dto=categoryService.getAllProductsOfCategory(id);
         return ResponseEntity.ok(dto);
     }
+
+
 }

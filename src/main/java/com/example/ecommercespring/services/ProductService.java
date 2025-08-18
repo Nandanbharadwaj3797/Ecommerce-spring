@@ -4,6 +4,8 @@ import com.example.ecommercespring.dto.ProductDto;
 import com.example.ecommercespring.dto.ProductWithCategoryDTO;
 import com.example.ecommercespring.entity.Category;
 import com.example.ecommercespring.entity.Product;
+import com.example.ecommercespring.exception.CategoryNotFoundException;
+import com.example.ecommercespring.exception.ProductNotFoundException;
 import com.example.ecommercespring.mappers.ProductMapper;
 import com.example.ecommercespring.repository.CategoryRepository;
 import com.example.ecommercespring.repository.ProductRepository;
@@ -22,7 +24,7 @@ public class ProductService implements IProductService {
     public ProductDto getProductById(Long id) throws Exception {
         return repo.findById(id)
                 .map(ProductMapper::toDto)
-                .orElseThrow(() -> new Exception("Product not found"));
+                .orElseThrow(() -> new ProductNotFoundException("Product with ID "+ id +" not found"));
                 // or //Product product=repo.findById(id)
                 //  .oeElseThrow(()-> new Exception("product not found"));
                 // return ProductDto dto=productMapper.toDto(product);
@@ -32,7 +34,7 @@ public class ProductService implements IProductService {
     @Override
     public ProductDto createProduct(ProductDto productDto)throws Exception {
         Category category =categoryRepository.findById(productDto.getCategoryId())
-                .orElseThrow(()->new Exception("Category not found"));
+                .orElseThrow(()->new CategoryNotFoundException("Category not found"));
 
         Product product = ProductMapper.toEntity(productDto, category);
         Product saved = repo.save(product);

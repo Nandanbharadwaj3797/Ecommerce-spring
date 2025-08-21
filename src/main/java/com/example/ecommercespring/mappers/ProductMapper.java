@@ -5,6 +5,9 @@ import com.example.ecommercespring.dto.ProductWithCategoryDTO;
 import com.example.ecommercespring.entity.Category;
 import com.example.ecommercespring.entity.Product;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class ProductMapper {
 
     public static ProductDto toDto(Product  product) {
@@ -54,6 +57,11 @@ public class ProductMapper {
                 .build();
     }
 
+    public static List<ProductDto> toDtoList(List<Product> products) {
+        return products.stream()
+                .map(ProductMapper::toDto)
+                .collect(Collectors.toList());
+    }
 
 }
 

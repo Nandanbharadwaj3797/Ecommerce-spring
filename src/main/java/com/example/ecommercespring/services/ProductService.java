@@ -11,6 +11,8 @@ import com.example.ecommercespring.repository.CategoryRepository;
 import com.example.ecommercespring.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductService implements IProductService {
 
@@ -48,4 +50,9 @@ public class ProductService implements IProductService {
         return  ProductMapper.toProductWithCategoryDTO(product);
     }
 
+    public List<ProductDto> getProductsByIds(List<Long> ids) {
+        List<Product> products = repo.findAllById(ids);
+        return ProductMapper.toDtoList(products);
+    }
 }
+
